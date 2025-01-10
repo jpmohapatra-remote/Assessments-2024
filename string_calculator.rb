@@ -20,9 +20,10 @@ class StringCalculator
   end
 
   def parse_numbers(numbers)
-    if numbers.start_with?('//')
-      delimiter, numbers = numbers[2..].split("\n", 2)
-      numbers.split(delimiter).map(&:to_i)
+    if numbers.start_with?("//")
+      delimiter_line, numbers = numbers[2..].split("\n", 2)
+      delimiter = delimiter_line.match(/\[(.+)\]/) ? Regexp.escape($1) : delimiter_line
+      numbers.split(Regexp.new(delimiter)).map(&:to_i)
     else
       numbers.gsub("\n", ',').split(',').map(&:to_i)
     end

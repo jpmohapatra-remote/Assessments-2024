@@ -35,5 +35,9 @@ RSpec.describe StringCalculator do
     it 'raises an exception if input is not a string' do
       expect { StringCalculator.new.add(nil) }.to raise_error(ArgumentError, 'Input must be a string')
     end
+
+    it 'supports multi-character custom delimiters' do
+      expect(StringCalculator.new.add("//[***]\n1***2***3")).to eq(6)
+    end
   end
 end

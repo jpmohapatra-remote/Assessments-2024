@@ -4,9 +4,10 @@
 # It provides a method to add numbers contained in a string.
 class StringCalculator
   def add(numbers)
+    raise ArgumentError, 'Input must be a string' unless numbers.is_a?(String)
     return 0 if numbers.empty?
 
-    if numbers.start_with?("//")
+    if numbers.start_with?('//')
       delimiter, numbers = numbers[2..].split("\n", 2)
       nums = numbers.split(delimiter).map(&:to_i)
     else
